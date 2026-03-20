@@ -1,0 +1,50 @@
+{
+  "festivals": [
+    {
+      "id": "diwali",
+      "name": "Diwali",
+      "type": "national",
+      "migration_pattern": true,
+      "days_before": 3,
+      "days_after": 2,
+      "modifiers_by_junction_type": {
+        "market": 1.8,
+        "temple": 1.5,
+        "highway": 1.4,
+        "bus_stand": 1.6,
+        "railway": 1.7,
+        "residential": 0.8,
+        "school": 0.5,
+        "hospital": 1.0,
+        "default": 1.2
+      },
+      "time_of_day_override": {
+        "hour_start": 18,
+        "hour_end": 22,
+        "multiplier": 2.5
+      },
+      "geographic_scope": {
+        "states": []
+      }
+    },
+    {
+      "id": "pongal",
+      "name": "Pongal",
+      "type": "regional",
+      "migration_pattern": true,
+      "days_before": 2,
+      "days_after": 1,
+      "modifiers_by_junction_type": {
+        "market": 1.5,
+        "temple": 1.8,
+        "highway": 1.6,
+        "school": 0.4,
+        "hospital": 1.0,
+        "default": 1.2
+      },
+      "geographic_scope": {
+        "states": ["Tamil Nadu", "Puducherry"]
+      }
+    }
+  ]
+}

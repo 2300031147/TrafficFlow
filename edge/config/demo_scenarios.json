@@ -1,0 +1,11 @@
+{
+  "scenarios": {
+    "full": {
+      "steps": [
+        {"time": 0, "action": "set_pattern", "pattern_id": "weekday_pattern", "message": "Normal traffic"},
+        {"time": 20, "action": "trigger_alert", "alert_type": "camera_offline", "message": "Simulating North camera drop..."},
+        {"time": 40, "action": "override_phase", "phase": "NS_GREEN", "duration": 120, "message": "Manual override triggered"}
+      ]
+    }
+  }
+}

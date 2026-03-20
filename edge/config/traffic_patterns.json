@@ -1,0 +1,47 @@
+{
+  "default_pattern": "weekday_pattern",
+  "patterns": {
+    "weekday_pattern": {
+      "description": "Standard weekday traffic",
+      "noise_sigma": 0.1,
+      "weekend": {
+        "morning_multiplier": 0.5,
+        "evening_multiplier": 0.8,
+        "morning_hours_end": 12
+      },
+      "vehicle_mix": {
+        "motorcycles": 0.4,
+        "cars": 0.3,
+        "buses": 0.1,
+        "trucks": 0.1,
+        "autorickshaws": 0.1
+      },
+      "hourly": {
+        "0": {"ns_base": 10, "ew_base": 5},
+        "1": {"ns_base": 5, "ew_base": 2},
+        "2": {"ns_base": 2, "ew_base": 1},
+        "3": {"ns_base": 5, "ew_base": 5},
+        "4": {"ns_base": 20, "ew_base": 15},
+        "5": {"ns_base": 50, "ew_base": 40},
+        "6": {"ns_base": 150, "ew_base": 100},
+        "7": {"ns_base": 300, "ew_base": 250},
+        "8": {"ns_base": 500, "ew_base": 450},
+        "9": {"ns_base": 600, "ew_base": 550},
+        "10": {"ns_base": 550, "ew_base": 500},
+        "11": {"ns_base": 450, "ew_base": 400},
+        "12": {"ns_base": 400, "ew_base": 350},
+        "13": {"ns_base": 380, "ew_base": 330},
+        "14": {"ns_base": 400, "ew_base": 350},
+        "15": {"ns_base": 450, "ew_base": 400},
+        "16": {"ns_base": 550, "ew_base": 500},
+        "17": {"ns_base": 650, "ew_base": 600},
+        "18": {"ns_base": 700, "ew_base": 650},
+        "19": {"ns_base": 600, "ew_base": 550},
+        "20": {"ns_base": 450, "ew_base": 400},
+        "21": {"ns_base": 300, "ew_base": 250},
+        "22": {"ns_base": 150, "ew_base": 100},
+        "23": {"ns_base": 50, "ew_base": 30}
+      }
+    }
+  }
+}
