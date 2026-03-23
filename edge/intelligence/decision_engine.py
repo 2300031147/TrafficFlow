@@ -105,6 +105,13 @@ class DecisionEngine:
             logger.warning("fallback_activated")
             self.signal_controller.backend.set_phase("ALL_RED", config.signal.fallback_cycle_seconds)
 
+        if festival_modifier > 1.0 and active_events:
+            reason_text = f"Festival traffic modifier active: {active_events[0]}"
+        elif pattern_confidence > 0.6:
+            reason_text = "Pattern-matched timing applied"
+        else:
+            reason_text = f"Webster formula applied — NS demand {ns_pcu:.0f} EW demand {ew_pcu:.0f}"
+
         decision_record = {
             "time": time.time(),
             "cycle_length": safe_decision["total_cycle"],
@@ -115,6 +122,6 @@ class DecisionEngine:
             "source": safe_decision.get("reason", "webster"),
             "active_event": active_events[0] if active_events else None,
             "pattern_confidence": float(pattern_confidence),
-            "decision_reason": "Standard logic applied"
+            "decision_reason": reason_text
         }
         return decision_record

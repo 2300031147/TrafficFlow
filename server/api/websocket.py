@@ -62,14 +62,13 @@ async def broadcast_loop():
 
                     for row in records:
                         raw = dict(row)
-                        # Serialize all non-JSON-native types (UUIDs, datetimes, Decimals)
-                        serialized = {
-                            k: str(v) if hasattr(v, 'hex')
-                            else v.isoformat() if hasattr(v, 'isoformat')
-                            else float(v) if hasattr(v, '__float__') and not isinstance(v, (int, float, bool))
-                            else v
-                            for k, v in raw.items()
-                        }
+                        def serialize(v):
+                            import uuid, decimal, datetime
+                            if isinstance(v, uuid.UUID): return str(v)
+                            if isinstance(v, (datetime.datetime, datetime.date)): return v.isoformat()
+                            if isinstance(v, decimal.Decimal): return float(v)
+                            return v
+                        serialized = {k: serialize(v) for k, v in raw.items()}
                         msg = {
                             "type": "SIGNAL_UPDATE",
                             "junction_id": str(row['junction_id']),

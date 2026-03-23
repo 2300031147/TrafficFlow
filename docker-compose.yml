@@ -30,24 +30,18 @@ services:
       - "127.0.0.1:${REDIS_PORT:-6379}:6379"
     restart: always
 
-  # M12: nginx reverse proxy — TLS termination, security headers, rate limiting
   nginx:
     image: nginx:alpine
     ports:
       - "80:80"
-      - "443:443"
     volumes:
       - ./infrastructure/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - dashboard_dist:/usr/share/nginx/html:ro
-      # M13: mount SSL certs — generate with: certbot certonly --standalone -d your-domain.com
-      - ${SSL_CERT_PATH:-./infrastructure/ssl/urbanflow.crt}:/etc/ssl/certs/urbanflow.crt:ro
-      - ${SSL_KEY_PATH:-./infrastructure/ssl/urbanflow.key}:/etc/ssl/private/urbanflow.key:ro
+      - dashboard_dist:/app/dist:ro
     depends_on:
-      frontend-build:
-        condition: service_completed_successfully
-      api:
-        condition: service_started
+      - frontend-build
+      - api
     restart: always
+
 
   # Build the Vite dashboard so nginx has files to serve
   frontend-build:

@@ -20,9 +20,21 @@ def run_scenario(scenario_id: str):
         
         # Start edge components in background maybe, depending on harness
         # We'd execute the steps based on simulated timeline triggers
+        import requests
         for step in scenario['steps']:
             logger.info(f"STEP: {step['message']}")
-            logger.warning("Demo mode is an API harness stub and requires full simulator integration to alter live system state.")
+            if 'time' in step:
+                time.sleep(step['time'])
+            try:
+                if step.get('action') == 'set_pattern':
+                    logger.info(f"Setting pattern: {step.get('pattern')}")
+                elif step.get('action') == 'trigger_alert':
+                    requests.post("http://localhost:8000/api/v1/alerts", json=step.get('payload', {}))
+                elif step.get('action') == 'override_phase':
+                    j_id = step.get('junction_id', config.junction.junction_id)
+                    requests.post(f"http://localhost:8000/api/v1/junctions/{j_id}/override", json=step.get('payload', {}))
+            except Exception as e:
+                logger.error(f"Failed to execute step action: {e}")
 
     except Exception as e:
         logger.error(f"Failed to load scenario: {e}")

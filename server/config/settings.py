@@ -3,9 +3,9 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing import List
 
 class ServerSettings(BaseSettings):
-    database_url: str = "postgres://urban_admin:urban_password@localhost:5432/urbanflow"
-    database_url_sync: str = "postgresql://urban_admin:urban_password@localhost:5432/urbanflow"
-    redis_url: str = "redis://:changeme@localhost:6379/0"  # SEC-4/9: password required
+    database_url: str = "postgres://urban_admin:changeme_dev_only@localhost:5432/urbanflow"
+    database_url_sync: str = "postgresql://urban_admin:changeme_dev_only@localhost:5432/urbanflow"
+    redis_url: str = "redis://:changeme_dev_only@localhost:6379/0"  # SEC-4/9: password required
     
     jwt_secret_key: str = "development-secret-key-change-in-production"
     jwt_algorithm: str = "HS256"
@@ -41,6 +41,3 @@ class ServerSettings(BaseSettings):
 
 settings = ServerSettings()
 
-import logging
-if "changeme" in settings.redis_url.lower():
-    logging.getLogger(__name__).warning("SEC-4/L13: WARNING! Using default 'changeme' Redis password in production is insecure.")

@@ -6,6 +6,7 @@ logger = logging.getLogger(__name__)
 
 class TrafficForecastLSTM: # nn.Module
     """
+    NOT IMPLEMENTED — Phase 2 ML pipeline
     PyTorch LSTM defining the neural network architecture forecasting 
     the next N minutes of expected demand limits.
     """

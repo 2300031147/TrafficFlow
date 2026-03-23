@@ -44,7 +44,7 @@ export default function PatternInsight({ junctionId }) {
   const diffColor = rawDiff > 0 ? 'var(--danger)' : 'var(--success)';
 
   return (
-    <div className="p-4 rounded-xl font-mono bg-gradient-to-br from-[var(--surface-solid)] to-[rgba(15,21,37,0.4)] border border-[var(--border)] relative overflow-hidden group">
+    <div className="p-4 rounded-lg font-mono bg-[var(--surface-solid)] border border-[var(--border)] relative overflow-hidden group">
       <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
         <svg className="w-12 h-12 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
       </div>
@@ -85,15 +85,15 @@ export default function PatternInsight({ junctionId }) {
                className="h-full rounded-full relative" 
                style={{ 
                   width: `${conf * 100}%`, 
-                  background: `linear-gradient(90deg, transparent, ${confColor})`, 
+                  backgroundColor: confColor, 
                   transition: 'width 1.5s cubic-bezier(0.22, 1, 0.36, 1)' 
                }}
             >
-               <div className="absolute right-0 top-0 bottom-0 w-2 bg-white opacity-50 shadow-[0_0_8px_white]"></div>
+               <div className="absolute right-0 top-0 bottom-0 w-2 bg-white opacity-50"></div>
             </div>
          </div>
          <div className="flex items-center gap-2 text-[10px] text-[var(--muted)] italic tracking-wide">
-           <span className="w-1 h-1 rounded-full animate-ping" style={{ backgroundColor: confColor }}></span>
+           <span className="w-1 h-1 rounded-full" style={{ backgroundColor: confColor }}></span>
            {confText}
          </div>
       </div>

@@ -33,6 +33,7 @@ build/
 # Environment files
 .env
 .env.*
+!.env.edge.example
 !.env.example
 
 # IDE files

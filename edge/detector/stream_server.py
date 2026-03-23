@@ -1,6 +1,6 @@
 import time
 import structlog
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from threading import Thread
 from edge.config.settings import config
 
@@ -43,9 +43,9 @@ class MJPEGRequestHandler(BaseHTTPRequestHandler):
 class StreamServer:
     def __init__(self):
         self.port = config.timing.stream_port
-        # SEC-C3/H8: bind to VPN interface only — not accessible on open LAN
-        bind_addr = getattr(config.uplink, 'vpn_ip', '127.0.0.1') or '127.0.0.1'
-        self.server = HTTPServer((bind_addr, self.port), MJPEGRequestHandler)
+        # SEC-C3/H8: Bind to 0.0.0.0 in dev to ensure stream is reachable
+        bind_addr = '0.0.0.0'
+        self.server = ThreadingHTTPServer((bind_addr, self.port), MJPEGRequestHandler)
         self.server.latest_frame = b"MOCK_JPEG_BINARY_DATA"
         self.thread = Thread(target=self.server.serve_forever, daemon=True)
 

@@ -21,12 +21,12 @@ export default function CommandCenter() {
       <div className="absolute inset-0 bg-[linear-gradient(rgba(61,142,248,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(61,142,248,0.03)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
 
       {/* Top HUD Header */}
-      <header className="h-16 border-b border-[var(--border)] bg-[rgba(5,8,16,0.8)] backdrop-blur-md flex items-center justify-between px-6 relative z-40 shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+      <header className="h-16 border-b border-[var(--border)] bg-[rgba(5,8,16,0.8)] flex items-center justify-between px-6 relative z-40">
         <div className="flex items-center gap-4">
-          <div className="w-8 h-8 rounded border border-[var(--accent)] flex items-center justify-center bg-[var(--surface-solid)] shadow-[0_0_10px_rgba(61,142,248,0.3)]">
+          <div className="w-8 h-8 rounded border border-[var(--accent)] flex items-center justify-center bg-[var(--surface-solid)]">
             <span className="font-rajdhani text-lg font-bold text-[var(--accent)]">UF</span>
           </div>
-          <h1 className="font-rajdhani text-2xl font-bold tracking-[0.2em] uppercase text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]">
+          <h1 className="font-rajdhani text-2xl font-bold tracking-[0.2em] uppercase text-white">
             Command Center
           </h1>
         </div>
@@ -39,9 +39,8 @@ export default function CommandCenter() {
         </div>
 
         <div className="flex items-center gap-6">
-           <div className="flex items-center gap-3 bg-[var(--surface-solid)] px-4 py-1.5 rounded-full border border-[var(--border)] shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+           <div className="flex items-center gap-3 bg-[var(--surface-solid)] px-4 py-1.5 rounded-full border border-[var(--border)]">
               <div className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--success)] opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-[var(--success)]"></span>
               </div>
               <span className="text-xs tracking-widest text-[var(--success)] font-bold">SYSTEM ACTIVE</span>
@@ -60,9 +59,8 @@ export default function CommandCenter() {
       <main className="flex-1 grid grid-cols-1 lg:grid-cols-[3fr_6fr_3fr] gap-4 p-4 relative z-40 h-[calc(100vh-64px)]">
         
         {/* Left Panel: Assets List */}
-        <aside className="glass-panel rounded-xl flex flex-col overflow-hidden relative group">
-           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-1000"></div>
-           <div className="p-4 border-b border-[var(--border)] bg-[rgba(15,21,37,0.8)] backdrop-blur">
+        <aside className="glass-panel rounded-[8px] flex flex-col overflow-hidden relative group">
+           <div className="p-4 border-b border-[var(--border)] bg-[rgba(15,21,37,0.8)]">
              <h2 className="font-rajdhani text-lg font-bold uppercase tracking-widest text-white flex items-center gap-2">
                <svg className="w-4 h-4 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
                City Assets
@@ -106,18 +104,18 @@ export default function CommandCenter() {
         </aside>
         
         {/* Center Panel: Map */}
-        <section className="glass-panel rounded-xl overflow-hidden relative min-h-[400px] border border-[var(--border)] shadow-[0_0_30px_rgba(0,0,0,0.5)]">
-          <div className="absolute inset-0 ring-1 ring-inset ring-[rgba(255,255,255,0.05)] rounded-xl pointer-events-none z-10"></div>
+        <section className="glass-panel rounded-[8px] overflow-hidden relative min-h-[400px] border border-[var(--border)]">
+          <div className="absolute inset-0 ring-1 ring-inset ring-[rgba(255,255,255,0.05)] rounded-[8px] pointer-events-none z-10"></div>
           {/* Decorative Corner Brackets */}
-          <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[var(--accent)] rounded-tl-xl z-20 pointer-events-none opacity-50"></div>
-          <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-[var(--accent)] rounded-tr-xl z-20 pointer-events-none opacity-50"></div>
-          <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-[var(--accent)] rounded-bl-xl z-20 pointer-events-none opacity-50"></div>
-          <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[var(--accent)] rounded-br-xl z-20 pointer-events-none opacity-50"></div>
+          <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[var(--accent)] rounded-tl-[8px] z-20 pointer-events-none opacity-50"></div>
+          <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-[var(--accent)] rounded-tr-[8px] z-20 pointer-events-none opacity-50"></div>
+          <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-[var(--accent)] rounded-bl-[8px] z-20 pointer-events-none opacity-50"></div>
+          <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[var(--accent)] rounded-br-[8px] z-20 pointer-events-none opacity-50"></div>
           
           <CityMap junctions={junctions} />
           
           {/* Overlay Status */}
-          <div className="absolute bottom-4 left-4 z-30 bg-[rgba(5,8,16,0.85)] backdrop-blur border border-[var(--border)] rounded-lg p-3">
+          <div className="absolute bottom-4 left-4 z-30 bg-[rgba(5,8,16,0.85)] border border-[var(--border)] rounded-[8px] p-3">
              <div className="text-[10px] tracking-widest text-[var(--muted)] mb-1">DATA LINK</div>
              <div className="text-xs font-bold tracking-wider text-[var(--success)] flex items-center gap-2">
                <span className="w-1.5 h-1.5 rounded-full bg-[var(--success)] animate-pulse"></span>
@@ -128,23 +126,15 @@ export default function CommandCenter() {
         
         {/* Right Panel: Alerts & Logs */}
         <aside className="flex flex-col gap-4">
-          <div className="flex-1 glass-panel rounded-xl overflow-hidden group border border-[var(--border)]">
-             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[var(--danger)] to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-1000"></div>
+          <div className="flex-1 glass-panel rounded-[8px] overflow-hidden group border border-[var(--border)] relative">
              <AlertBanner />
           </div>
-          <div className="h-[30%] glass-panel rounded-xl overflow-hidden p-4 flex flex-col group relative">
-             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-1000"></div>
+          <div className="h-[30%] glass-panel rounded-[8px] overflow-hidden p-4 flex flex-col group relative">
              <h2 className="font-rajdhani text-sm font-bold uppercase tracking-widest text-white mb-3 flex items-center gap-2 pb-2 border-b border-[var(--border)]">
                <svg className="w-4 h-4 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                System Log
              </h2>
-             <div className="flex-1 overflow-y-auto text-[10px] text-[var(--muted)] space-y-1.5 font-mono pr-2">
-               <div className="flex items-start gap-2"><span className="text-[var(--accent)]">[{currentTime.toISOString().split('T')[1].slice(0,8)}]</span><span className="text-[var(--text)]">Heartbeat synched.</span></div>
-               <div className="flex items-start gap-2"><span className="text-[var(--accent)]">[{currentTime.toISOString().split('T')[1].slice(0,8)}]</span><span className="text-[var(--text)]">Telemetry streams active.</span></div>
-               <div className="flex items-start gap-2"><span className="text-[var(--accent)]">[{currentTime.toISOString().split('T')[1].slice(0,8)}]</span><span className="text-[var(--text)]">AI prediction models stabilized.</span></div>
-               <div className="flex items-start gap-2 opacity-50"><span className="text-[var(--accent)]">[{new Date(currentTime.getTime() - 60000).toISOString().split('T')[1].slice(0,8)}]</span><span>Background scans completed.</span></div>
-               <div className="flex items-start gap-2 opacity-30"><span className="text-[var(--accent)]">[{new Date(currentTime.getTime() - 120000).toISOString().split('T')[1].slice(0,8)}]</span><span>User successfully authenticated.</span></div>
-             </div>
+               <div className="flex items-start gap-2 opacity-50"><span className="text-[var(--accent)]">[{currentTime.toISOString().split('T')[1].slice(0,8)}]</span><span>Awaiting system events...</span></div>
           </div>
         </aside>
       </main>

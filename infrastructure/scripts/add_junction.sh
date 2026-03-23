@@ -14,6 +14,12 @@ if [ "$VPN_IP" = "10.8.0.MANUAL" ]; then
     echo "WARNING: VPN IP not supplied. You must assign this from your WireGuard subnet tracker."
 fi
 
+CITY="${2:-Bengaluru}"
+STATE="${3:-Karnataka}"
+DISTRICT="${4:-Central}"
+JUNCTION_TYPE="${5:-highway}"
+NAME="${6:-New Edge Node}"
+
 CRED_FILE="junction_${JUNCTION_ID}.env"
 
 echo "--- Generated Configuration ---"
@@ -35,5 +41,10 @@ echo "Credentials saved to ${CRED_FILE}"
 echo "Copy to the Pi's .env.edge, then DELETE this file."
 echo ""
 
-# Would INSERT INTO junctions (id, vpn_ip, api_token_hash, ...) with hashed token here.
-echo "Remember to INSERT the junction record into PostgreSQL with the bcrypt-hashed token."
+# SEC-12: Insert directly into PostgreSQL database
+TOKEN_HASH=$(python3 -c "import bcrypt; print(bcrypt.hashpw(b'${TOKEN}', bcrypt.gensalt()).decode())")
+echo "Inserting junction record into PostgreSQL..."
+PGPASSWORD=${POSTGRES_PASSWORD:-changeme_dev_only} psql \
+  -h localhost -U urban_admin -d urbanflow \
+  -c "INSERT INTO junctions (id, vpn_ip, api_token_hash, name, city, district, state, country, junction_type, lat, lng, camera_count, status) VALUES ('$JUNCTION_ID', '$VPN_IP', '$TOKEN_HASH', '$NAME', '$CITY', '$DISTRICT', '$STATE', 'India', '$JUNCTION_TYPE', 12.9716, 77.5946, 4, 'offline');"
+

@@ -10,6 +10,7 @@ class LSTMTrainer:
         self.junction_id = junction_id
 
     def fetch_training_data(self) -> List[Dict[str, Any]]:
+        # NOT IMPLEMENTED — Phase 2 ML pipeline
         # Querying DB history per junction ID securely
         # returning mock representation...
         return []
@@ -31,5 +32,5 @@ class LSTMTrainer:
         with open(path, "wb") as f:
             f.write(b"MOCK_MODEL_DATA")
             
-        logger.info(f"Finished training run. Generating .pt artifacts in storage.")
+        logger.info("STUB: training not implemented — Phase 2")
         return True

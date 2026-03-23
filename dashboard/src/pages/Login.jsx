@@ -32,20 +32,18 @@ export default function Login() {
     <div className="relative flex h-screen items-center justify-center bg-[var(--bg)] m-0 font-mono text-[var(--text)] overflow-hidden">
       {/* Dynamic Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full scan-lines pointer-events-none"></div>
-      <div className="absolute top-[-20%] left-[-10%] w-96 h-96 bg-[var(--accent)] opacity-[0.10] rounded-full blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-[-20%] right-[-10%] w-96 h-96 bg-[var(--accent)] opacity-[0.10] rounded-full blur-[120px] pointer-events-none"></div>
 
       <form 
         onSubmit={onSubmit} 
-        className="glass-panel p-10 max-w-md w-full rounded-2xl relative z-10 transition-all duration-500 hover:shadow-[0_0_40px_rgba(61,142,248,0.15)]"
+        className="glass-panel p-10 max-w-md w-full rounded-[8px] relative z-10 transition-all duration-500"
       >
         <div className="flex flex-col items-center mb-10">
-          <div className="w-20 h-20 rounded-full border border-[var(--border)] flex items-center justify-center mb-6 bg-[var(--surface-solid)] relative group shadow-[0_0_20px_rgba(0,0,0,0.5)]">
-             <div className="absolute inset-0 rounded-full border border-[var(--accent)] opacity-0 group-hover:opacity-100 group-hover:animate-ping transition-opacity duration-700"></div>
-             <div className="absolute inset-2 rounded-full border border-[var(--border-glow)] opacity-50"></div>
-             <span className="font-rajdhani text-3xl font-bold text-[var(--accent)] tracking-widest ml-1 drop-shadow-[0_0_8px_rgba(61,142,248,0.8)]">UF</span>
+          <div className="w-20 h-20 rounded-full border border-[var(--border)] flex items-center justify-center mb-6 bg-[var(--surface-solid)] relative group">
+             <div className="absolute inset-0 rounded-full border border-[var(--accent)] opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+             <div className="absolute inset-2 rounded-full border border-[var(--border)] opacity-50"></div>
+             <span className="font-rajdhani text-3xl font-bold text-[var(--accent)] tracking-widest ml-1">UF</span>
           </div>
-          <h2 className="font-rajdhani text-5xl font-bold uppercase tracking-[0.2em] text-center mb-3 text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">
+          <h2 className="font-rajdhani text-5xl font-bold uppercase tracking-[0.2em] text-center mb-3 text-white">
             UrbanFlow
           </h2>
           <h3 className="text-xs uppercase tracking-[0.35em] text-center text-[var(--accent)] opacity-80">
@@ -92,17 +90,16 @@ export default function Login() {
           <button 
             type="submit" 
             disabled={loading}
-            className="mt-6 bg-gradient-to-r from-[var(--accent)] to-blue-600 text-white hover:brightness-125 transition-all font-rajdhani py-4 uppercase tracking-[0.25em] font-bold rounded-xl relative overflow-hidden group shadow-[0_0_15px_rgba(61,142,248,0.3)] hover:shadow-[0_0_25px_rgba(61,142,248,0.5)] disabled:opacity-70 disabled:cursor-not-allowed"
+            className="mt-6 bg-[var(--accent)] text-white hover:brightness-125 transition-all font-rajdhani py-4 uppercase tracking-[0.25em] font-bold rounded-[8px] relative overflow-hidden group disabled:opacity-70 disabled:cursor-not-allowed"
           >
             <span className="relative z-10 flex items-center justify-center gap-3">
                {loading ? (
                  <>
-                   <div className="w-5 h-5 rounded-full border-2 border-white/30 border-t-white animate-spin"></div>
+                   <div className="w-5 h-5 rounded-full border-2 border-[var(--surface-solid)] border-t-white animate-spin"></div>
                    <span>AUTHENTICATING...</span>
                  </>
                ) : 'Initiate Handshake'}
             </span>
-            <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity"></div>
           </button>
         </div>
       </form>

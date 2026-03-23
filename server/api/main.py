@@ -65,6 +65,10 @@ async def startup_event():
     # M14: reject default DB credentials in production
     if settings.environment == "production" and "urban_password" in settings.database_url:
         raise RuntimeError("FATAL: default DB password in production. Set DATABASE_URL in .env.")
+    
+    if "changeme" in settings.redis_url.lower() and settings.environment == "production":
+        logger.warning("SEC-4/L13: WARNING! Using default 'changeme' Redis password in production is insecure.")
+        
     await get_pool()
     import asyncio
     from server.api.websocket import broadcast_loop

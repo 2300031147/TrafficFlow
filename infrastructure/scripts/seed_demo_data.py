@@ -35,7 +35,7 @@ async def seed_database():
         for j in mock_junctions:
             await conn.execute("""
                 INSERT INTO junctions (id, name, city, district, state, country, junction_type, lat, lng, camera_count, vpn_ip, status)
-                VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, 'active')
+                VALUES ($1, $2, $3, $4, $5, $6, $7::junction_type_enum, $8, $9, $10, $11, 'active')
                 ON CONFLICT (id) DO NOTHING
             """, *j)
 
@@ -72,10 +72,15 @@ async def seed_database():
                 for lane in ['north_in', 'south_in', 'east_in', 'west_in']:
                     c = random.randint(5, 40)
                     congestion = 'heavy' if c > 30 else 'moderate' if c > 15 else 'clear'
+                    cars = int(c * 0.3)
+                    trucks = int(c * 0.1)
+                    buses = int(c * 0.1)
+                    motorcycles = int(c * 0.4)
+                    autorickshaws = c - (cars + trucks + buses + motorcycles)
                     await conn.execute("""
-                        INSERT INTO vehicle_counts (time, junction_id, lane, count, stopped_count, avg_speed, congestion)
-                        VALUES ($1, $2, $3, $4, $5, $6, $7)
-                    """, ts, curr_id, lane, c, c//4, random.uniform(10.0, 45.0), congestion)
+                        INSERT INTO vehicle_counts (time, junction_id, lane, count, stopped_count, avg_speed, congestion, cars, trucks, buses, motorcycles, autorickshaws)
+                        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+                    """, ts, curr_id, lane, c, c//4, random.uniform(10.0, 45.0), congestion, cars, trucks, buses, motorcycles, autorickshaws)
                 
                 await conn.execute("""
                     INSERT INTO signal_decisions (time, junction_id, cycle_length, ns_green, ew_green, ns_demand, ew_demand, source)

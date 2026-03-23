@@ -1,5 +1,5 @@
 from server.db.connection import get_connection
-
+import uuid
 async def get_all_junctions(cities: list[str] = None) -> list[dict]:
     base_query = """
     SELECT j.id, j.name, j.city, j.district, j.state, j.country, j.lat, j.lng,
@@ -24,6 +24,11 @@ async def get_all_junctions(cities: list[str] = None) -> list[dict]:
         return [dict(r) for r in records]
 
 async def get_junction_by_id(junction_id: str) -> dict | None:
+    try:
+        uuid.UUID(junction_id)
+    except ValueError:
+        return None
+        
     query = """
     SELECT id, name, city, district, state, country, lat, lng,
       junction_type, status, camera_count, created_at, updated_at
@@ -34,6 +39,11 @@ async def get_junction_by_id(junction_id: str) -> dict | None:
         return dict(record) if record else None
 
 async def upsert_junction_heartbeat(junction_id: str, health_data: dict):
+    try:
+        uuid.UUID(junction_id)
+    except ValueError:
+        return
+        
     update_q = """
     UPDATE junctions SET status='active', updated_at=NOW()
     WHERE id = $1
@@ -66,6 +76,11 @@ async def upsert_junction_heartbeat(junction_id: str, health_data: dict):
             )
 
 async def get_junction_vpn_ip(junction_id: str) -> str | None:
+    try:
+        uuid.UUID(junction_id)
+    except ValueError:
+        return None
+        
     query = "SELECT vpn_ip FROM junctions WHERE id = $1"
     async with get_connection() as conn:
         record = await conn.fetchrow(query, junction_id)

@@ -8,9 +8,14 @@ command -v python3.11 >/dev/null 2>&1 || { echo >&2 "Python 3.11 required but no
 command -v docker >/dev/null 2>&1 || { echo >&2 "Docker required but not installed. Aborting."; exit 1; }
 command -v npm >/dev/null 2>&1 || { echo >&2 "npm required but not installed. Aborting."; exit 1; }
 
-echo "Installing Edge virtual environment..."
+echo "Installing Edge and Server virtual environments..."
 python3.11 -m venv venv_edge
 source venv_edge/bin/activate
+pip install -r requirements-edge.txt
+deactivate
+
+python3.11 -m venv venv_server
+source venv_server/bin/activate
 pip install -r requirements-server.txt
 deactivate
 
@@ -21,7 +26,7 @@ echo "Waiting for PostgreSQL to be ready..."
 sleep 5
 
 echo "Applying Schema..."
-cat server/db/schema.sql | docker exec -i urbanflow-db psql -U urban_admin -d urbanflow
+cat server/db/schema.sql | docker-compose exec -T db psql -U urban_admin -d urbanflow
 
 echo "Installing Dashboard dependencies..."
 cd dashboard
